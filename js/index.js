@@ -12,7 +12,14 @@ import {
     VELOCITY_AIRPLANE_X,
     VELOCITY_AIRPLANE_PROJECTILE,
     playButton,
-    modalEl, MUSIC, MUTED_AUDIO_SHOOTING, mutedButton, MUSIC_LOSE, background, AIRPLANE_RELOAD_TIME
+    modalEl,
+    MUSIC,
+    MUTED_AUDIO_SHOOTING,
+    mutedButton,
+    MUSIC_LOSE,
+    background,
+    AIRPLANE_RELOAD_TIME,
+    pauseButton
 } from "./variables.js";
 
 
@@ -44,6 +51,7 @@ let randomInterval = Math.floor((Math.random() * 500) + 200);
 let game = {
     over: false,
     active: true,
+    pause: false,
 }
 let score = 0;
 
@@ -71,6 +79,7 @@ function init() {
     game = {
         over: false,
         active: true,
+        pause: false,
     }
     score = 0;
     scoreEl.innerHTML = score;
@@ -118,7 +127,7 @@ function createParticles({object, color, fades}) {
                 y: (Math.random() - 0.5) * 2
             },
             radius: Math.random(),
-            color: 'yellow',
+            color: color || 'yellow',
             fades: true
         }))
     }
@@ -126,7 +135,7 @@ function createParticles({object, color, fades}) {
 
 // animate
 function animate() {
-    if (game.active) {
+    if (game.active && !game.pause) {
         requestAnimationFrame(animate)
         context.fillStyle = 'black';
         context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -258,7 +267,8 @@ function animate() {
 
         frames++;
 
-    } else {
+    }
+    if (!game.active) {
         modalEl.style.display = 'block';
     }
 }
@@ -298,7 +308,7 @@ addEventListener('keydown', ({key}) => {
             if (time - lastShootTime < AIRPLANE_RELOAD_TIME) {
                 break;
             }
-            if (MUTED_AUDIO_SHOOTING === false) {
+            if (MUTED_AUDIO_SHOOTING === false && !game.pause) {
                 audioShooting();
             }
 
@@ -326,7 +336,7 @@ addEventListener('keyup', ({key}) => {
             if (time - lastShootTime < AIRPLANE_RELOAD_TIME) {
                 break;
             }
-            if (MUTED_AUDIO_SHOOTING === false) {
+            if (MUTED_AUDIO_SHOOTING === false && !game.pause) {
                 audioShooting();
             }
 
@@ -349,6 +359,12 @@ mutedButton.addEventListener('mousedown', () => {
 
 
     MUSIC.muted = !MUSIC.muted;
+})
+
+// pause or unpause
+pauseButton.addEventListener('mousedown', () => {
+    game.pause = !game.pause;
+    animate();
 })
 
 // start game or restart game

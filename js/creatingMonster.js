@@ -1,5 +1,6 @@
 import {Monster} from "./monster.js";
 import { CANVAS_WIDTH, INTERVAL_MONSTER, VELOCITY_MONSTER_X, VELOCITY_MONSTER_Y } from "./variables.js";
+import {SecondMonster} from "./secondMonster.js";
 export class CreatingMonster {
     constructor() {
         this.position = {
@@ -12,22 +13,44 @@ export class CreatingMonster {
             y: VELOCITY_MONSTER_Y
         }
 
-        this.monsters = []
+        this.monsters = [];
 
-        const rows = Math.floor(Math.random() * 5 + 2)
-        const columns = Math.floor(Math.random() * 5 + 2)
+        let randLevel = Math.round(Math.random());
 
-        this.width = (columns - 1) * INTERVAL_MONSTER;
+        if (randLevel === 0) {
+            const rows1 = Math.floor(Math.random() * 5 + 2)
+            const columns1 = Math.floor(Math.random() * 5 + 2)
 
-        for (let i = 0; i < columns; i++) {
-            for (let j = 0; j < rows; j++) {
-                this.monsters.push(
-                    new Monster({
-                        position: {
-                            x: i * INTERVAL_MONSTER,
-                            y: j * INTERVAL_MONSTER
-                        }
-                    }));
+            this.width = (columns1 - 1) * INTERVAL_MONSTER;
+
+            for (let i = 0; i < columns1; i++) {
+                for (let j = 0; j < rows1; j++) {
+                    this.monsters.push(
+                        new Monster({
+                            position: {
+                                x: i * INTERVAL_MONSTER,
+                                y: j * INTERVAL_MONSTER
+                            }
+                        }));
+                }
+            }
+        }
+        if (randLevel === 1) {
+            const rows2 = Math.floor(Math.random() * 5 + 2)
+            const columns2 = Math.floor(Math.random() * 5 + 2)
+
+            this.width = (columns2 - 1) * INTERVAL_MONSTER;
+
+            for (let i = 0; i < columns2; i++) {
+                for (let j = 0; j < rows2; j++) {
+                    this.monsters.push(
+                        new SecondMonster({
+                            position: {
+                                x: i * INTERVAL_MONSTER,
+                                y: j * INTERVAL_MONSTER
+                            }
+                        }));
+                }
             }
         }
     }

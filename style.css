@@ -11,7 +11,7 @@ body {
     top: 10px;
     margin: 0;
     font-family: sans-serif;
-    font-size: 40px;
+    font-size: 28px;
 
 }
 
@@ -50,10 +50,31 @@ body {
 .block-music {
     position: fixed;
     margin-top: 680px;
+    margin-left: 10px;
     height: 40px;
     border-radius: 8px;
 }
 .button-music {
+    position: fixed;
+    background: blueviolet;
+    font-size: 20px;
+    height: 30px;
+    font-family: sans-serif;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    width: 100px;
+}
+
+.block-pause {
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 45%;
+    height: 40px;
+    width: 10%;
+    border-radius: 8px;
+}
+.button-pause {
     position: fixed;
     background: blueviolet;
     font-size: 20px;

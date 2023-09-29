@@ -4,6 +4,7 @@ export const context = canvas.getContext('2d');
 export const playButton = document.querySelector('#playButton');
 export const modalEl = document.querySelector('#modalEl')
 export const mutedButton = document.querySelector('#mutedButton');
+export const pauseButton = document.querySelector('#pauseButton');
 export const background = document.querySelector('#block');
 
 
